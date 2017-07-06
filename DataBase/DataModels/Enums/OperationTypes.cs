@@ -8,7 +8,7 @@ namespace DataBase.DataModels.Enums
 {
     public enum OperationTypes
     {
-        WriteOff,
-        WriteOn
+        WriteOff = 0,
+        WriteOn = 1
     }
 }

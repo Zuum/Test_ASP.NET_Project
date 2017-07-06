@@ -14,7 +14,7 @@ namespace DataBase
 
         }
 
-        public DbSet<DataModels.Person> Persons { get; set; }
+        public DbSet<DataModels.Person> People { get; set; }
         public DbSet<DataModels.PersonCommunication> PersonCommunications { get; set; }
         public DbSet<DataModels.PersonOperation> PersonOperations { get; set; }
         public DbSet<DataModels.PhoneType> PhoneTypes { get; set; }

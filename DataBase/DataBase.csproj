@@ -55,11 +55,25 @@
     <Compile Include="DataModels\PersonCommunication.cs" />
     <Compile Include="DataModels\PersonOperation.cs" />
     <Compile Include="DataModels\PhoneType.cs" />
+    <Compile Include="Migrations\DataSets\PersonCommunicationData.cs" />
+    <Compile Include="Migrations\DataSets\PersonData.cs" />
+    <Compile Include="Migrations\201707060938039_Initial.cs" />
+    <Compile Include="Migrations\201707060938039_Initial.Designer.cs">
+      <DependentUpon>201707060938039_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\DataSets\PersonOperationData.cs" />
+    <Compile Include="Migrations\DataSets\PhoneTypeData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201707060938039_Initial.resx">
+      <DependentUpon>201707060938039_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
