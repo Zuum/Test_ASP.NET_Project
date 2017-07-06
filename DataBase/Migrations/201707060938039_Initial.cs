@@ -43,7 +43,7 @@ namespace DataBase.Migrations
                         date = c.DateTime(nullable: false),
                         account = c.String(),
                         operationType = c.Int(nullable: false),
-                        amount = c.Int(nullable: false),
+                        amount = c.Double(nullable: false),
                         Person_id = c.Int(),
                     })
                 .PrimaryKey(t => t.id)

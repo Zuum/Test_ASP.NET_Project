@@ -13,7 +13,7 @@ namespace DataBase.DataModels
         public DateTime date { get; set; }
         public string account { get; set; }
         public Enums.OperationTypes operationType { get; set; }
-        public int amount { get; set; }
+        public double amount { get; set; }
 
         public Person Person { get; set; }
     }
