@@ -6,7 +6,7 @@ using DataBase;
 
 namespace EntryTest.DataHolders
 {
-    public class PersonOperation : Person
+    public class PersonOperationHolder : PersonHolder
     {
         public string city { get; set; }
         public string account { get; set; }

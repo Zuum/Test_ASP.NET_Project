@@ -5,7 +5,7 @@ using System.Web;
 
 namespace EntryTest.DataHolders
 {
-    public class Person
+    public class PersonHolder
     {
         public string name { get; set; }
         public string phone { get; set; }
