@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using DataBase;
+using System.Xml.Serialization;
 
 namespace EntryTest.DataHolders
 {
+    [XmlType("person-operation")]
     public class PersonOperationHolder : PersonHolder
     {
         public string city { get; set; }
