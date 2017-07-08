@@ -12,7 +12,7 @@ namespace EntryTest.DataHolders
         public string account { get; set; }
         public DataBase.DataModels.Enums.OperationTypes operationType { get; set; }
         public double amount { get; set; }
-        public double amountEUR { get; set; }
+        public double amountEUR { get; set; } //TODO: dictionary
         public DateTime date { get; set; }
 
         // Reflection needed to set amount by currencyCode without switch

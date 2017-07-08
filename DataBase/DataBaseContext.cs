@@ -11,7 +11,7 @@ namespace DataBase
     {
         public DataBaseContext() : base("BankingSystem")
         {
-
+            Configuration.LazyLoadingEnabled = false;
         }
 
         public DbSet<DataModels.Person> People { get; set; }

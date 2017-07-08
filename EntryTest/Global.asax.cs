@@ -13,6 +13,7 @@ namespace EntryTest
 
         protected void Application_Start(object sender, EventArgs e)
         {
+            //API routing
             GlobalConfiguration.Configure(App_Start.WebApiConfig.Register);
         }
 

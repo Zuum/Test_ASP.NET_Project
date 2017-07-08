@@ -8,6 +8,18 @@ namespace DataBase.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.People",
+                c => new
+                    {
+                        id = c.Int(nullable: false, identity: true),
+                        name = c.String(),
+                        city = c.String(),
+                        age = c.Int(nullable: false),
+                        score = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.id);
+            
+            CreateTable(
                 "dbo.PersonCommunications",
                 c => new
                     {
@@ -24,14 +36,11 @@ namespace DataBase.Migrations
                 .Index(t => t.PhoneType_id);
             
             CreateTable(
-                "dbo.People",
+                "dbo.PhoneTypes",
                 c => new
                     {
                         id = c.Int(nullable: false, identity: true),
-                        name = c.String(),
-                        city = c.String(),
-                        age = c.Int(nullable: false),
-                        score = c.Int(nullable: false),
+                        phoneType = c.String(),
                     })
                 .PrimaryKey(t => t.id);
             
@@ -50,29 +59,20 @@ namespace DataBase.Migrations
                 .ForeignKey("dbo.People", t => t.Person_id)
                 .Index(t => t.Person_id);
             
-            CreateTable(
-                "dbo.PhoneTypes",
-                c => new
-                    {
-                        id = c.Int(nullable: false, identity: true),
-                        phoneType = c.String(),
-                    })
-                .PrimaryKey(t => t.id);
-            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.PersonCommunications", "PhoneType_id", "dbo.PhoneTypes");
             DropForeignKey("dbo.PersonOperations", "Person_id", "dbo.People");
+            DropForeignKey("dbo.PersonCommunications", "PhoneType_id", "dbo.PhoneTypes");
             DropForeignKey("dbo.PersonCommunications", "Person_id", "dbo.People");
             DropIndex("dbo.PersonOperations", new[] { "Person_id" });
             DropIndex("dbo.PersonCommunications", new[] { "PhoneType_id" });
             DropIndex("dbo.PersonCommunications", new[] { "Person_id" });
-            DropTable("dbo.PhoneTypes");
             DropTable("dbo.PersonOperations");
-            DropTable("dbo.People");
+            DropTable("dbo.PhoneTypes");
             DropTable("dbo.PersonCommunications");
+            DropTable("dbo.People");
         }
     }
 }
