@@ -159,9 +159,9 @@
     <Compile Include="DataModels\PersonCommunication.cs" />
     <Compile Include="DataModels\PersonOperation.cs" />
     <Compile Include="DataModels\PhoneType.cs" />
-    <Compile Include="Migrations\201707071551126_Initial.cs" />
-    <Compile Include="Migrations\201707071551126_Initial.Designer.cs">
-      <DependentUpon>201707071551126_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201707081245555_initial.cs" />
+    <Compile Include="Migrations\201707081245555_initial.Designer.cs">
+      <DependentUpon>201707081245555_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\DataSets\PersonCommunicationData.cs" />
@@ -175,8 +175,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201707071551126_Initial.resx">
-      <DependentUpon>201707071551126_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201707081245555_initial.resx">
+      <DependentUpon>201707081245555_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

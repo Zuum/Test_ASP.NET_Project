@@ -23,6 +23,8 @@ namespace EntryTest.Controllers
             return db.PersonOperations;
         }
 
+
+
         // GET: api/PersonOperations/5
         [ResponseType(typeof(PersonOperation))]
         public IHttpActionResult GetPersonOperation(int id)
