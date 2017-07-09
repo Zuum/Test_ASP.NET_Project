@@ -3,7 +3,7 @@ namespace DataBase.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -18,7 +18,16 @@ namespace DataBase.Migrations
                         score = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.id);
-            
+
+            CreateTable(
+                "dbo.PhoneTypes",
+                c => new
+                {
+                    id = c.Int(nullable: false, identity: true),
+                    phoneType = c.String(),
+                })
+                .PrimaryKey(t => t.id);
+
             CreateTable(
                 "dbo.PersonCommunications",
                 c => new
@@ -34,15 +43,6 @@ namespace DataBase.Migrations
                 .ForeignKey("dbo.PhoneTypes", t => t.PhoneType_id)
                 .Index(t => t.Person_id)
                 .Index(t => t.PhoneType_id);
-            
-            CreateTable(
-                "dbo.PhoneTypes",
-                c => new
-                    {
-                        id = c.Int(nullable: false, identity: true),
-                        phoneType = c.String(),
-                    })
-                .PrimaryKey(t => t.id);
             
             CreateTable(
                 "dbo.PersonOperations",
@@ -70,8 +70,8 @@ namespace DataBase.Migrations
             DropIndex("dbo.PersonCommunications", new[] { "PhoneType_id" });
             DropIndex("dbo.PersonCommunications", new[] { "Person_id" });
             DropTable("dbo.PersonOperations");
-            DropTable("dbo.PhoneTypes");
             DropTable("dbo.PersonCommunications");
+            DropTable("dbo.PhoneTypes");
             DropTable("dbo.People");
         }
     }
