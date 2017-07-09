@@ -131,8 +131,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\DataHolders\PersonHolder.cs" />
-    <Content Include="App_Code\DataHolders\PersonOperationHolder.cs" />
+    <Compile Include="App_Code\DataHolders\PersonHolder.cs" />
+    <Compile Include="App_Code\DataHolders\PersonOperationHolder.cs" />
     <Content Include="App_Code\ResponseBuilders\XmlReportBuilder.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\PeopleController.cs" />

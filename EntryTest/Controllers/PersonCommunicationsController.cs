@@ -20,7 +20,7 @@ namespace EntryTest.Controllers
         // GET: api/PersonCommunications
         public IQueryable<PersonCommunication> GetPersonCommunications()
         {
-            return db.PersonCommunications;
+            return db.PersonCommunications.Include(pc => pc.Person).Include(pc => pc.PhoneType);
         }
 
         // GET: api/PersonCommunications/5

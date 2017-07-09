@@ -20,10 +20,8 @@ namespace EntryTest.Controllers
         // GET: api/PersonOperations
         public IQueryable<PersonOperation> GetPersonOperations()
         {
-            return db.PersonOperations;
+            return db.PersonOperations.Include(po => po.Person);
         }
-
-
 
         // GET: api/PersonOperations/5
         [ResponseType(typeof(PersonOperation))]
@@ -102,6 +100,25 @@ namespace EntryTest.Controllers
             db.SaveChanges();
 
             return Ok(personOperation);
+        }
+
+        [HttpGet]
+        [ActionName("task")]
+        public List<EntryTest.DataHolders.PersonOperationHolder> GetTaskData()
+        {
+            return db.Database.SqlQuery<EntryTest.DataHolders.PersonOperationHolder>(
+                "" +
+                "SELECT          \"P\".\"name\", \"PC\".\"phone\", \"P\".\"city\", \"PO\".\"account\", " +
+                                 "\"PO\".\"operationType\", \"PO\".\"amount\", \"PO\".\"date\" " +
+                "FROM            \"PersonOperations\" AS PO " +
+                "INNER JOIN      \"People\" AS P ON \"PO\".\"Person_id\" = \"P\".\"id\" " +
+                "INNER JOIN      \"PersonCommunications\" AS PC ON \"PC\".\"Person_id\" = \"P\".\"id\" " +
+                "WHERE           \"PC\".\"phone\" IS NOT NULL " +
+                "AND             \"PC\".\"isUsed\" = '1' " +
+                "AND             \"PO\".\"date\" >= '20130701' " +
+                "AND             \"P\".\"city\" IN('Москва', 'Санкт-Петербург') " +
+                ""
+                ).ToList();
         }
 
         protected override void Dispose(bool disposing)
