@@ -9,78 +9,78 @@ namespace EntryTest.ResponseMakers
 {
     public static class FileSender
     {
-        //public static string UploadFilesToRemoteUrl(string url, string[] files, List<int> formFields = null)
-        //{
-        //    string boundary = "----------------------------" + DateTime.Now.Ticks.ToString("x");
+        public static string uploadFilesToRemoteUrl(string url, string[] files, list<int> formfields = null)
+        {
+            //string boundary = "----------------------------" + datetime.now.ticks.tostring("x");
 
-        //    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-        //    request.ContentType = "multipart/form-data; boundary=" +
-        //                            boundary;
-        //    request.Method = "POST";
-        //    request.KeepAlive = true;
+            //httpwebrequest request = (httpwebrequest)webrequest.create(url);
+            //request.contenttype = "multipart/form-data; boundary=" +
+            //                        boundary;
+            //request.method = "post";
+            //request.keepalive = true;
 
-        //    Stream memStream = new System.IO.MemoryStream();
+            //stream memstream = new system.io.memorystream();
 
-        //    var boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" +
-        //                                                            boundary + "\r\n");
-        //    var endBoundaryBytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" +
-        //                                                                boundary + "--");
+            //var boundarybytes = system.text.encoding.ascii.getbytes("\r\n--" +
+            //                                                        boundary + "\r\n");
+            //var endboundarybytes = system.text.encoding.ascii.getbytes("\r\n--" +
+            //                                                            boundary + "--");
 
 
-        //    string formdataTemplate = "\r\n--" + boundary +
-        //                                "\r\nContent-Disposition: form-data; name=\"{0}\";\r\n\r\n{1}";
+            //string formdatatemplate = "\r\n--" + boundary +
+            //                            "\r\ncontent-disposition: form-data; name=\"{0}\";\r\n\r\n{1}";
 
-        //    if (formFields != null)
-        //    {
-        //        foreach (string key in formFields.Keys)
-        //        {
-        //            string formitem = string.Format(formdataTemplate, key, formFields[key]);
-        //            byte[] formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
-        //            memStream.Write(formitembytes, 0, formitembytes.Length);
-        //        }
-        //    }
+            //if (formfields != null)
+            //{
+            //    foreach (string key in formfields.keys)
+            //    {
+            //        string formitem = string.format(formdatatemplate, key, formfields[key]);
+            //        byte[] formitembytes = system.text.encoding.utf8.getbytes(formitem);
+            //        memstream.write(formitembytes, 0, formitembytes.length);
+            //    }
+            //}
 
-        //    string headerTemplate =
-        //        "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\n" +
-        //        "Content-Type: application/octet-stream\r\n\r\n";
+            //string headertemplate =
+            //    "content-disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\n" +
+            //    "content-type: application/octet-stream\r\n\r\n";
 
-        //    for (int i = 0; i < files.Length; i++)
-        //    {
-        //        memStream.Write(boundarybytes, 0, boundarybytes.Length);
-        //        var header = string.Format(headerTemplate, "uplTheFile", files[i]);
-        //        var headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
+            //for (int i = 0; i < files.length; i++)
+            //{
+            //    memstream.write(boundarybytes, 0, boundarybytes.length);
+            //    var header = string.format(headertemplate, "uplthefile", files[i]);
+            //    var headerbytes = system.text.encoding.utf8.getbytes(header);
 
-        //        memStream.Write(headerbytes, 0, headerbytes.Length);
+            //    memstream.write(headerbytes, 0, headerbytes.length);
 
-        //        using (var fileStream = new FileStream(files[i], FileMode.Open, FileAccess.Read))
-        //        {
-        //            var buffer = new byte[1024];
-        //            var bytesRead = 0;
-        //            while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
-        //            {
-        //                memStream.Write(buffer, 0, bytesRead);
-        //            }
-        //        }
-        //    }
+            //    using (var filestream = new filestream(files[i], filemode.open, fileaccess.read))
+            //    {
+            //        var buffer = new byte[1024];
+            //        var bytesread = 0;
+            //        while ((bytesread = filestream.read(buffer, 0, buffer.length)) != 0)
+            //        {
+            //            memstream.write(buffer, 0, bytesread);
+            //        }
+            //    }
+            //}
 
-        //    memStream.Write(endBoundaryBytes, 0, endBoundaryBytes.Length);
-        //    request.ContentLength = memStream.Length;
+            //memstream.write(endboundarybytes, 0, endboundarybytes.length);
+            //request.contentlength = memstream.length;
 
-        //    using (Stream requestStream = request.GetRequestStream())
-        //    {
-        //        memStream.Position = 0;
-        //        byte[] tempBuffer = new byte[memStream.Length];
-        //        memStream.Read(tempBuffer, 0, tempBuffer.Length);
-        //        memStream.Close();
-        //        requestStream.Write(tempBuffer, 0, tempBuffer.Length);
-        //    }
+            //using (stream requeststream = request.getrequeststream())
+            //{
+            //    memstream.position = 0;
+            //    byte[] tempbuffer = new byte[memstream.length];
+            //    memstream.read(tempbuffer, 0, tempbuffer.length);
+            //    memstream.close();
+            //    requeststream.write(tempbuffer, 0, tempbuffer.length);
+            //}
 
-        //    using (var response = request.GetResponse())
-        //    {
-        //        Stream stream2 = response.GetResponseStream();
-        //        StreamReader reader2 = new StreamReader(stream2);
-        //        return reader2.ReadToEnd();
-        //    }
-        //}
+            //using (var response = request.getresponse())
+            //{
+            //    stream stream2 = response.getresponsestream();
+            //    streamreader reader2 = new streamreader(stream2);
+            //    return reader2.readtoend();
+            //}
+        }
     }
 }

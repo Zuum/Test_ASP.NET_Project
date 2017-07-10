@@ -18,8 +18,11 @@ namespace EntryTest.ResponseMakers
             }
             string filePath = Environment.CurrentDirectory + "/GeneratedReports/report" 
                             + (Int64)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds + ".xml";
-            Console.WriteLine(data);
-            serializer.Serialize(File.Create(filePath), data);
+
+            using (FileStream fs = new FileStream(@filePath, FileMode.Create))
+            {
+                serializer.Serialize(fs, data);
+            }
 
             return filePath;
         }

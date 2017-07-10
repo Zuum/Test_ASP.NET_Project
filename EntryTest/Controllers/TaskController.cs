@@ -25,7 +25,7 @@ namespace EntryTest.Controllers
             {
                 content = db.Database.SqlQuery<DataHolders.PersonOperationHolder>(
                 "" +
-                "SELECT          \"P\".\"name\", \"PC\".\"phone\", \"P\".\"city\", \"PO\".\"account\", " +
+                "SELECT          \"P\".\"name\", \"PC\".\"phone\", \"P\".\"city\", \"P\".\"score\", \"PO\".\"account\", " +
                                  "\"PO\".\"operationType\", \"PO\".\"amount\", \"PO\".\"date\" " +
                 "FROM            \"PersonOperations\" AS PO " +
                 "INNER JOIN      \"People\" AS P ON \"PO\".\"Person_id\" = \"P\".\"id\" " +
