@@ -131,15 +131,17 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\DataHolders\PersonHolder.cs" />
-    <Content Include="App_Code\DataHolders\PersonOperationHolder.cs" />
-    <Content Include="App_Code\ResponseMakers\XmlReportSerializer.cs" />
-    <Content Include="App_Code\ResponseMakers\XmlReportDeserializer.cs" />
+    <Compile Include="App_Code\DataHolders\HoldersContainer.cs" />
+    <Compile Include="App_Code\DataHolders\PersonHolder.cs" />
+    <Compile Include="App_Code\DataHolders\PersonOperationHolder.cs" />
+    <Compile Include="App_Code\ResponseMakers\FileSender.cs" />
+    <Compile Include="App_Code\ResponseMakers\XmlReportSerializer.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
     <Compile Include="Controllers\PersonCommunicationsController.cs" />
     <Compile Include="Controllers\PersonOperationsController.cs" />
     <Compile Include="Controllers\PhoneTypesController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

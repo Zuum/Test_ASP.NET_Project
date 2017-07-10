@@ -5,17 +5,32 @@ using System.Linq;
 using System.Web;
 using System.Xml.Serialization;
 
-namespace EntryTest.App_Code.ResponseMakers
+namespace EntryTest.ResponseMakers
 {
     public static class XmlReportSerializer
     {
-        public static string SerializeReport(IEnumerable<Object> data)
+        public static string SerializeReport(DataHolders.HoldersContainer data)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(IEnumerable<Object>));
-            string filePath = "GeneratedReports/report" + (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds + ".xml";
+            XmlSerializer serializer = new XmlSerializer(typeof(DataHolders.HoldersContainer));
+            if(!Directory.Exists(Environment.CurrentDirectory + "/GeneratedReports"))
+            {
+                Directory.CreateDirectory(Environment.CurrentDirectory + "/GeneratedReports");
+            }
+            string filePath = Environment.CurrentDirectory + "/GeneratedReports/report" 
+                            + (Int64)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds + ".xml";
+            Console.WriteLine(data);
             serializer.Serialize(File.Create(filePath), data);
 
             return filePath;
+        }
+
+        public static List<T> DeserializeReport<T>(string filePath)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(IEnumerable<Object>));
+            serializer.Deserialize(File.OpenRead(filePath));
+
+            return new List<T>();
+
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace EntryTest.DataHolders
 {
-    [XmlType("person-operation")]
+    [XmlRoot("Container")]
     public class PersonOperationHolder : PersonHolder
     {
         public string city { get; set; }

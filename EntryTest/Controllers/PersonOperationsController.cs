@@ -17,12 +17,14 @@ namespace EntryTest.Controllers
     {
         private DataBaseContext db = new DataBaseContext();
 
+        [HttpGet]
         // GET: api/PersonOperations
         public IQueryable<PersonOperation> GetPersonOperations()
         {
             return db.PersonOperations.Include(po => po.Person);
         }
 
+        [HttpGet]
         // GET: api/PersonOperations/5
         [ResponseType(typeof(PersonOperation))]
         public IHttpActionResult GetPersonOperation(int id)
@@ -36,6 +38,7 @@ namespace EntryTest.Controllers
             return Ok(personOperation);
         }
 
+        [HttpPut]
         // PUT: api/PersonOperations/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutPersonOperation(int id, PersonOperation personOperation)
@@ -71,6 +74,7 @@ namespace EntryTest.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [HttpPost]
         // POST: api/PersonOperations
         [ResponseType(typeof(PersonOperation))]
         public IHttpActionResult PostPersonOperation(PersonOperation personOperation)
@@ -86,6 +90,7 @@ namespace EntryTest.Controllers
             return CreatedAtRoute("DefaultApi", new { id = personOperation.id }, personOperation);
         }
 
+        [HttpDelete]
         // DELETE: api/PersonOperations/5
         [ResponseType(typeof(PersonOperation))]
         public IHttpActionResult DeletePersonOperation(int id)
@@ -100,25 +105,6 @@ namespace EntryTest.Controllers
             db.SaveChanges();
 
             return Ok(personOperation);
-        }
-
-        [HttpGet]
-        [ActionName("task")]
-        public List<EntryTest.DataHolders.PersonOperationHolder> GetTaskData()
-        {
-            return db.Database.SqlQuery<EntryTest.DataHolders.PersonOperationHolder>(
-                "" +
-                "SELECT          \"P\".\"name\", \"PC\".\"phone\", \"P\".\"city\", \"PO\".\"account\", " +
-                                 "\"PO\".\"operationType\", \"PO\".\"amount\", \"PO\".\"date\" " +
-                "FROM            \"PersonOperations\" AS PO " +
-                "INNER JOIN      \"People\" AS P ON \"PO\".\"Person_id\" = \"P\".\"id\" " +
-                "INNER JOIN      \"PersonCommunications\" AS PC ON \"PC\".\"Person_id\" = \"P\".\"id\" " +
-                "WHERE           \"PC\".\"phone\" IS NOT NULL " +
-                "AND             \"PC\".\"isUsed\" = '1' " +
-                "AND             \"PO\".\"date\" >= '20130701' " +
-                "AND             \"P\".\"city\" IN('Москва', 'Санкт-Петербург') " +
-                ""
-                ).ToList();
         }
 
         protected override void Dispose(bool disposing)
