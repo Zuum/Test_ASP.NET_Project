@@ -21,7 +21,7 @@ namespace EntryTest.Controllers
         public void GetTask()
         {
 
-            ResponseMakers.FileSender.PostMultipleFiles("http://webservice.com/xmlreport/", new string[] { ResponseMakers.XmlReportSerializer.SerializeReport(new DataHolders.HoldersContainer
+            ResponseMakers.FileSender.PostMultipleFiles("http://localhost:56880/xmlreport/", new string[] { ResponseMakers.XmlReportSerializer.SerializeReport(new DataHolders.HoldersContainer
             {
                 content = db.Database.SqlQuery<DataHolders.PersonOperationHolder>(
                 "" +

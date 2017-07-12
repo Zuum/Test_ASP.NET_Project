@@ -1,1 +1,1 @@
-﻿<%@ WebService Language="C#" CodeBehind="FileReciver.asmx.cs" Class="EntryTest.XmlReport" %>
+﻿<%@ WebService Language="C#" CodeBehind="FileReciver.asmx.cs" Class="EntryTest.FileReciver" %>
