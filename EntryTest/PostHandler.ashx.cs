@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Routing;
 
@@ -38,6 +40,23 @@ namespace EntryTest
                 file.SaveAs(fullPath);
 
                 string csvFilePath = ResponseMakers.XmlReportSerializer.DeserializeReport(fullPath);
+
+                string topic = "Оплата задолженностей за период: " + DateTime.Now.Month;
+                string body = "«Сгенерирован отчет оплаты задолженностей за период: " +
+                    DateTime.Now.Month + " " + DateTime.Now.Year + "\n" + "\t\t\t\t\t\t\t" +
+                    DateTime.Now.ToShortDateString();
+                    
+                var mailMessage = new MailMessage("YOURCOMPANY@gmail.com", "collection@bank.ru", topic, body);
+                var attachment = new Attachment(csvFilePath);
+                mailMessage.Attachments.Add(attachment); 
+            
+                var smtpClient = new SmtpClient("smtp.gmail.com", 587)
+                {
+                    Credentials = new NetworkCredential("YOURCOMPANY@gmail.com", "YOURPASSWORD"),
+                    EnableSsl = true
+                };
+
+                smtpClient.Send(mailMessage);
             }
         }
 
