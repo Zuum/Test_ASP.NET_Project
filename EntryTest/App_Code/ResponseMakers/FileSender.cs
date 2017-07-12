@@ -9,78 +9,59 @@ namespace EntryTest.ResponseMakers
 {
     public static class FileSender
     {
-        //public static string uploadFilesToRemoteUrl(string url, string[] files, list<int> formfields = null)
-        //{
-        //    string boundary = "----------------------------" + datetime.now.ticks.tostring("x");
+        public static void PostMultipleFiles(string url, string[] files)
+        {
+            string boundary = "----------------------------" + DateTime.Now.Ticks.ToString("x");
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+            httpWebRequest.ContentType = "multipart/form-data; boundary=" + boundary;
+            httpWebRequest.Method = "POST";
+            httpWebRequest.KeepAlive = true;
+            httpWebRequest.Credentials = CredentialCache.DefaultCredentials;
+            Stream memStream = new MemoryStream();
+            byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
+            string formdataTemplate = "\r\n--" + boundary + "\r\nContent-Disposition:  form-data; name=\"{0}\";\r\n\r\n{1}";
+            string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\n Content-Type: application/octet-stream\r\n\r\n";
+            memStream.Write(boundarybytes, 0, boundarybytes.Length);
 
-        //    httpwebrequest request = (httpwebrequest)webrequest.create(url);
-        //    request.contenttype = "multipart/form-data; boundary=" +
-        //                            boundary;
-        //    request.method = "post";
-        //    request.keepalive = true;
+            for (int i = 0; i < files.Length; i++)
+            {
+                string header = string.Format(headerTemplate, "file" + i, files[i]);
+                byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
+                memStream.Write(headerbytes, 0, headerbytes.Length);
+                FileStream fileStream = new FileStream(files[i], FileMode.Open,
+                FileAccess.Read);
+                byte[] buffer = new byte[1024];
+                int bytesRead = 0;
+                while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
+                {
+                    memStream.Write(buffer, 0, bytesRead);
+                }
+                memStream.Write(boundarybytes, 0, boundarybytes.Length);
+                fileStream.Close();
+            }
 
-        //    stream memstream = new system.io.memorystream();
+            httpWebRequest.ContentLength = memStream.Length;
+            Stream requestStream = httpWebRequest.GetRequestStream();
+            memStream.Position = 0;
+            byte[] tempBuffer = new byte[memStream.Length];
+            memStream.Read(tempBuffer, 0, tempBuffer.Length);
+            memStream.Close();
+            requestStream.Write(tempBuffer, 0, tempBuffer.Length);
+            requestStream.Close();
 
-        //    var boundarybytes = system.text.encoding.ascii.getbytes("\r\n--" +
-        //                                                            boundary + "\r\n");
-        //    var endboundarybytes = system.text.encoding.ascii.getbytes("\r\n--" +
-        //                                                                boundary + "--");
-
-
-        //    string formdatatemplate = "\r\n--" + boundary +
-        //                                "\r\ncontent-disposition: form-data; name=\"{0}\";\r\n\r\n{1}";
-
-        //    if (formfields != null)
-        //    {
-        //        foreach (string key in formfields.keys)
-        //        {
-        //            string formitem = string.format(formdatatemplate, key, formfields[key]);
-        //            byte[] formitembytes = system.text.encoding.utf8.getbytes(formitem);
-        //            memstream.write(formitembytes, 0, formitembytes.length);
-        //        }
-        //    }
-
-        //    string headertemplate =
-        //        "content-disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\n" +
-        //        "content-type: application/octet-stream\r\n\r\n";
-
-        //    for (int i = 0; i < files.length; i++)
-        //    {
-        //        memstream.write(boundarybytes, 0, boundarybytes.length);
-        //        var header = string.format(headertemplate, "uplthefile", files[i]);
-        //        var headerbytes = system.text.encoding.utf8.getbytes(header);
-
-        //        memstream.write(headerbytes, 0, headerbytes.length);
-
-        //        using (var filestream = new filestream(files[i], filemode.open, fileaccess.read))
-        //        {
-        //            var buffer = new byte[1024];
-        //            var bytesread = 0;
-        //            while ((bytesread = filestream.read(buffer, 0, buffer.length)) != 0)
-        //            {
-        //                memstream.write(buffer, 0, bytesread);
-        //            }
-        //        }
-        //    }
-
-        //    memstream.write(endboundarybytes, 0, endboundarybytes.length);
-        //    request.contentlength = memstream.length;
-
-        //    using (stream requeststream = request.getrequeststream())
-        //    {
-        //        memstream.position = 0;
-        //        byte[] tempbuffer = new byte[memstream.length];
-        //        memstream.read(tempbuffer, 0, tempbuffer.length);
-        //        memstream.close();
-        //        requeststream.write(tempbuffer, 0, tempbuffer.length);
-        //    }
-
-        //    using (var response = request.getresponse())
-        //    {
-        //        stream stream2 = response.getresponsestream();
-        //        streamreader reader2 = new streamreader(stream2);
-        //        return reader2.readtoend();
-        //    }
-        //}
+            try
+            {
+                WebResponse webResponse = httpWebRequest.GetResponse();
+                Stream stream = webResponse.GetResponseStream();
+                StreamReader reader = new StreamReader(stream);
+                string var = reader.ReadToEnd();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error getting response");
+                Console.WriteLine(ex);
+            }
+            httpWebRequest = null;
+        }
     }
 }
