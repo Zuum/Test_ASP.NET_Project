@@ -135,6 +135,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Public.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +157,13 @@
       <DependentUpon>PostHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Public.aspx.cs">
+      <DependentUpon>Public.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public.aspx.designer.cs">
+      <DependentUpon>Public.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataBase\DataBase.csproj">

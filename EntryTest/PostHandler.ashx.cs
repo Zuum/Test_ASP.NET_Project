@@ -48,7 +48,7 @@ namespace EntryTest
                     
                 var mailMessage = new MailMessage("YOURCOMPANY@gmail.com", "collection@bank.ru", topic, body);
                 var attachment = new Attachment(csvFilePath);
-                mailMessage.Attachments.Add(attachment); 
+                mailMessage.Attachments.Add(attachment);
             
                 var smtpClient = new SmtpClient("smtp.gmail.com", 587)
                 {
