@@ -18,10 +18,10 @@ namespace EntryTest.Controllers
         private DataBaseContext db = new DataBaseContext();
 
         [HttpGet]
-        public string GetTask()
+        public void GetTask()
         {
 
-            return ResponseMakers.XmlReportSerializer.SerializeReport(new DataHolders.HoldersContainer
+            ResponseMakers.FileSender.PostMultipleFiles("http://webservice.com/xmlreport/", new string[] { ResponseMakers.XmlReportSerializer.SerializeReport(new DataHolders.HoldersContainer
             {
                 content = db.Database.SqlQuery<DataHolders.PersonOperationHolder>(
                 "" +
@@ -36,6 +36,7 @@ namespace EntryTest.Controllers
                 "AND             \"P\".\"city\" IN('Москва', 'Санкт-Петербург') " +
                 ""
                 ).ToList()
+            })
             });
         }
 
