@@ -6,6 +6,8 @@ using System.Xml.Serialization;
 
 namespace EntryTest.DataHolders
 {
+    [Serializable]
+    [XmlRoot("Holder")]
     public class HoldersContainer
     {
         [XmlArray("Operation"), XmlArrayItem(typeof(PersonOperationHolder), ElementName = "PersonOperation")]

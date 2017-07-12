@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Data.Entity;
-
+using System.Web.Routing;
 
 namespace EntryTest.App_Start
 {
@@ -18,7 +18,7 @@ namespace EntryTest.App_Start
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-
+            RouteTable.Routes.Add(new Route("xmlreport", new RouteHandler()));
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

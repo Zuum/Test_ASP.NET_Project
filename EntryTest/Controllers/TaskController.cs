@@ -10,20 +10,31 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using DataBase;
 using DataBase.DataModels;
+using EntryTest.DataHolders;
 
 namespace EntryTest.Controllers
 {
+    static class PohExtension
+    {
+        public static PersonOperationHolder Combine(this PersonOperationHolder first, PersonOperationHolder second)
+        {
+            if(first == null)
+            {
+                return second;
+            }
+            first.phone += "," + second.phone;
+            return first;
+        }
+    }
+
     public class TaskController : ApiController
     {
         private DataBaseContext db = new DataBaseContext();
 
         [HttpGet]
-        public void GetTask()
+        public IHttpActionResult GetTask()
         {
-
-            ResponseMakers.FileSender.PostMultipleFiles("http://localhost:56880/xmlreport/", new string[] { ResponseMakers.XmlReportSerializer.SerializeReport(new DataHolders.HoldersContainer
-            {
-                content = db.Database.SqlQuery<DataHolders.PersonOperationHolder>(
+            var content = db.Database.SqlQuery<PersonOperationHolder>(
                 "" +
                 "SELECT          \"P\".\"name\", \"PC\".\"phone\", \"P\".\"city\", \"P\".\"score\", \"PO\".\"account\", " +
                                  "\"PO\".\"operationType\", \"PO\".\"amount\", \"PO\".\"date\" " +
@@ -35,11 +46,21 @@ namespace EntryTest.Controllers
                 "AND             \"PO\".\"date\" >= '20130701' " +
                 "AND             \"P\".\"city\" IN('Москва', 'Санкт-Петербург') " +
                 ""
-                ).ToList()
+                ).ToList();
+
+            content = content.GroupBy(poh => poh.account).Select(pohg => pohg.Aggregate((accum, next) => accum.Combine(next))).ToList();
+
+            ResponseMakers.FileSender.PostMultipleFiles("http://localhost:56880/xmlreport/", new string[] 
+            {
+                ResponseMakers.XmlReportSerializer.SerializeReport( new HoldersContainer
+            {
+               content = content
             })
             });
+            return Ok();
         }
 
+   
         protected override void Dispose(bool disposing)
         {
             if (disposing)
